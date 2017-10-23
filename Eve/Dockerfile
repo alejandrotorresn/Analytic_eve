@@ -50,7 +50,7 @@ RUN pip install Eve Flask PyMongo envparse
 # Script
 RUN touch start.sh
 RUN echo "#!/bin/sh" >> start.sh
-RUN echo "python /home/eve/run.py &" >> start.sh
+RUN echo "python /home/run.py &" >> start.sh
 RUN echo "/usr/sbin/apache2 -D FOREGROUND" >> start.sh
 
 # Run Eve
