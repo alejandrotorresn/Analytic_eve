@@ -35,17 +35,15 @@ RUN ln -s python3.5 /usr/bin/python
 # Set the working directory to /home
 WORKDIR /home
 
-# Copy the current directory contents into the container at /home
-COPY ./run.py /home/run.py
-COPY ./settings.py /home/settings.py
+# Create run.py and settings.py files
+RUN touch run.py
+RUN echo "from eve import Eve" >> run.py
+RUN echo "app = Eve()" >> run.py
+RUN echo "app.run()" >> run.py
+RUN touch settings.py
 
 # Install any needed packages specified in requirements.txt
 RUN pip install Eve Flask PyMongo envparse
-
-# Mongo ENV
-#ENV MONGO_HOST mongo
-#ENV MONGO_PORT 27017
-#ENV MONGO_DBNAME eve
 
 # Script
 RUN touch start.sh
