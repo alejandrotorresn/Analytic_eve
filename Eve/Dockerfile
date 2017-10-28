@@ -36,11 +36,12 @@ RUN ln -s python3.5 /usr/bin/python
 WORKDIR /home
 
 # Create run.py and settings.py files
-RUN touch run.py
-RUN echo "from eve import Eve" >> run.py
-RUN echo "app = Eve()" >> run.py
-RUN echo "app.run()" >> run.py
-RUN touch settings.py
+RUN mkdir /home/eve
+RUN touch /home/eve/run.py
+RUN echo "from eve import Eve" >> /home/eve/run.py
+RUN echo "app = Eve()" >> /home/eve/run.py
+RUN echo "app.run()" >> /home/eve/run.py
+RUN touch /home/eve/settings.py
 
 # Install any needed packages specified in requirements.txt
 RUN pip install Eve Flask PyMongo envparse
@@ -48,7 +49,7 @@ RUN pip install Eve Flask PyMongo envparse
 # Script
 RUN touch start.sh
 RUN echo "#!/bin/sh" >> start.sh
-RUN echo "python /home/run.py &" >> start.sh
+RUN echo "python /home/eve/run.py &" >> start.sh
 RUN echo "/usr/sbin/apache2 -D FOREGROUND" >> start.sh
 
 # Run Eve
