@@ -48,7 +48,7 @@ RUN conda update python -y
 
 # Install packages
 RUN conda install bokeh numpy matplotlib pandas scikit-learn scikit-image jupyter jupyterlab ipywidgets numba pyproj scipy seaborn sqlite pymongo tensorflow zlib
-RUN pip install pymc3 motionless utm
+RUN pip install pymc3 motionless utm envparse
 
 # Clear packages conda
 RUN conda clean --tarballs -y
