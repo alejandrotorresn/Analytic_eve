@@ -15,6 +15,7 @@ RUN mkdir -p /home/analytics/
 
 # Create an Analytics user so our program doesn't run as root.
 RUN groupadd -r analytics && useradd -r -g analytics -d /home/analytics -s /sbin/nologin -c "Docker image user" analytics
+RUN usermod -a -G disk analytics
 
 # Set the home directory to our analytics user's home.
 ENV HOME=/home/analytics
