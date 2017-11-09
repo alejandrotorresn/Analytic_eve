@@ -8,14 +8,14 @@ EXPOSE 8888
 # Ubuntu packages
 RUN apt-get update --fix-missing
 RUN apt-get install -y wget bzip2 git build-essential
-RUN apt-get install -y libreadline6 libreadline6-dev inetutils-ping git
+RUN apt-get install -y libreadline6 libreadline6-dev inetutils-ping
 
 # Create the home directory for the new Analytics user.
 RUN mkdir -p /home/analytics/
 
 # Create an Analytics user so our program doesn't run as root.
-RUN groupadd -r analytics && useradd -r -g analytics -d /home/analytics -s /sbin/nologin -c "Docker image user" analytics
-RUN usermod -a -G disk analytics
+# RUN groupadd -r analytics && useradd -r -g analytics -d /home/analytics -s /sbin/nologin -c "Docker image user" analytics
+# RUN usermod -a -G disk analytics
 
 # Set the home directory to our analytics user's home.
 ENV HOME=/home/analytics
@@ -30,10 +30,10 @@ RUN chmod +x /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
 # Chown all the files to the app user.
-RUN chown -R analytics:analytics $HOME
+# RUN chown -R analytics:analytics $HOME
 
 # Set user
-USER analytics:analytics
+# USER analytics:analytics
 
 # Install Miniconda
 ENV REPO=https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
@@ -55,4 +55,4 @@ RUN pip install pymc3 motionless utm envparse
 RUN conda clean --tarballs -y
 
 # Run Jupyter
-CMD ["jupyter-lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--NotebookApp.token="]
+CMD ["jupyter-lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token="]
