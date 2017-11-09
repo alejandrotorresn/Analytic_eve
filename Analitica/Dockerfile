@@ -8,7 +8,7 @@ EXPOSE 8888
 # Ubuntu packages
 RUN apt-get update --fix-missing
 RUN apt-get install -y wget bzip2 git build-essential
-RUN apt-get install -y libreadline6 libreadline6-dev inetutils-ping
+RUN apt-get install -y libreadline6 libreadline6-dev inetutils-ping git
 
 # Create the home directory for the new Analytics user.
 RUN mkdir -p /home/analytics/
